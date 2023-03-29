@@ -4,6 +4,14 @@ let users = people
 const UserController = (app) => {
   app.get('/api/users', findUsers)
   app.get('/api/users/:uid', findUserById);
+  app.post('/api/users', createUser);
+}
+
+const createUser = (req, res) => {
+  const newUser = req.body;
+  newUser._id = (new Date()).getTime() + '';
+  users.push(newUser);
+  res.json(newUser);
 }
 
 const findUserById = (req, res) => {
